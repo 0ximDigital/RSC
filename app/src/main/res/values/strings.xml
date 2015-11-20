@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">RSC</string>
+
+    <!-- Intent strings -->
+    <string name="select_picture">Select Picture:</string>
+    <string name="chooser_email_dialog_title">Choose email client:</string>
+    <string name="chooser_call_dialog_title">Call number with:</string>
+
+</resources>

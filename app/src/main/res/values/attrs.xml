@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SocialButton">
+        <attr name="socialNetworkName" format="string"/>
+        <attr name="isConnected" format="boolean"/>
+    </declare-styleable>
+    <attr name="typeface" format="string"/>
+
+    <declare-styleable name="TypefacedTextView">
+        <attr name="typeface"/>
+    </declare-styleable>
+
+    <declare-styleable name="TypefacedButton">
+        <attr name="typeface"/>
+    </declare-styleable>
+
+    <declare-styleable name="TypefacedEditText">
+        <attr name="typeface"/>
+    </declare-styleable>
+
+    <declare-styleable name="TypefacedSwitch">
+        <attr name="typeface"/>
+    </declare-styleable>
+
+    <declare-styleable name="TypefacedToolbar">
+        <attr name="typeface"/>
+        <attr name="titleTextAppearance"/>
+    </declare-styleable>
+</resources>
