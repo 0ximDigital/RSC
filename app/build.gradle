@@ -15,6 +15,10 @@ buildscript {
     }
 }
 
+repositories {
+    maven { url 'http://maven.livotovlabs.pro/content/groups/public' }
+}
+
 def versionMajor = 1
 def versionMinor = 0
 def versionPatch = 0
@@ -81,5 +85,7 @@ dependencies {
     compile 'com.annimon:stream:1.0.2'
 
     compile 'com.facebook.stetho:stetho:1.2.0'
+
+    compile ('eu.livotov.labs:camview:2.0.0.DEV5-SNAPSHOT@aar') {transitive=true}
 
 }
