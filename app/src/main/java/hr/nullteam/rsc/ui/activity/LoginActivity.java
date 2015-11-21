@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import javax.inject.Inject;
 
 import hr.nullteam.rsc.R;
-import hr.nullteam.rsc.ui.fragment.MapFragment;
 import hr.nullteam.rsc.ui.fragment.login.LoginFragment;
 import hr.nullteam.rsc.ui.fragment.login.RegisterFragment;
 import hr.nullteam.rsc.ui.module.ActivityComponent;
@@ -30,8 +29,7 @@ public final class LoginActivity extends PresenterActivity<LoginActivityPresente
 
         if (savedInstanceState == null) {
             loginFragment = LoginFragment.newInstance();
-            //fragmentManager.beginTransaction().add(R.id.activity_container, loginFragment, LoginFragment.TAG).commit();
-            fragmentManager.beginTransaction().add(R.id.activity_container, MapFragment.newInstance(), MapFragment.TAG).commit();
+            fragmentManager.beginTransaction().add(R.id.activity_container, loginFragment, LoginFragment.TAG).commit();
         } else {
             loginFragment = (LoginFragment) fragmentManager.findFragmentByTag(LoginFragment.TAG);
             registerFragment = (RegisterFragment) fragmentManager.findFragmentByTag(RegisterFragment.TAG);
@@ -61,7 +59,7 @@ public final class LoginActivity extends PresenterActivity<LoginActivityPresente
     }
 
     public void showRegisterFragment() {
-        if(registerFragment == null) {
+        if (registerFragment == null) {
             registerFragment = RegisterFragment.newInstance();
         }
         fragmentManager.beginTransaction().add(R.id.activity_container, registerFragment, RegisterFragment.TAG).commit();

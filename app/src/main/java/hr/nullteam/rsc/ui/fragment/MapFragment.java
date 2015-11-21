@@ -6,13 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import hr.nullteam.rsc.R;
 import hr.nullteam.rsc.ui.module.FragmentComponent;
@@ -56,25 +51,10 @@ public class MapFragment extends DaggerFragment<MapFragmentPresenter> {
     }
 
     private void setupMap() {
-        this.map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_fragment)).getMap();
-
-        final LatLng HAMBURG = new LatLng(53.558, 9.927);
-        final LatLng KIEL = new LatLng(53.551, 9.993);
-
-        Marker hamburg = map.addMarker(new MarkerOptions().position(HAMBURG)
-                .title("Merkher"));
-        Marker kiel = map.addMarker(new MarkerOptions()
-                .position(KIEL)
-                .title("Marker")
-                .snippet("Marher snippet")
-                .icon(BitmapDescriptorFactory
-                        .fromResource(R.mipmap.ic_launcher)));
-
-        // Move the camera instantly to hamburg with a zoom of 15.
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(HAMBURG, 15));
-
-        // Zoom in, animating the camera.
-        map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+        if(this.map == null) {
+            this.map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_fragment)).getMap();
+        }
+        // TODO
     }
 
     private void extractArguments() {
