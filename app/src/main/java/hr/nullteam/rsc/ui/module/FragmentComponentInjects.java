@@ -1,11 +1,13 @@
 package hr.nullteam.rsc.ui.module;
 
+import hr.nullteam.rsc.ui.fragment.MapFragment;
 import hr.nullteam.rsc.ui.fragment.QrScanningFragment;
 import hr.nullteam.rsc.ui.fragment.login.LoginFragment;
 import hr.nullteam.rsc.ui.fragment.TodoFragment;
 import hr.nullteam.rsc.ui.fragment.login.RegisterFragment;
 import hr.nullteam.rsc.ui.fragment.profile.EditProfileFragment;
 import hr.nullteam.rsc.ui.fragment.profile.ProfileDetailsFragment;
+import hr.nullteam.rsc.ui.presenter.MapFragmentPresenter;
 import hr.nullteam.rsc.ui.presenter.QrScanningFragmentPresenter;
 import hr.nullteam.rsc.ui.presenter.TodoFragmentPresenter;
 import hr.nullteam.rsc.ui.presenter.login.LoginFragmentPresenter;
@@ -38,5 +40,9 @@ public interface FragmentComponentInjects {
     void inject(QrScanningFragment qrScanningFragment);
 
     void inject(QrScanningFragmentPresenter qrScanningFragmentPresenter);
+
+    void inject(MapFragment mapFragment);
+
+    void inject(MapFragmentPresenter mapFragmentPresenter);
 
 }
