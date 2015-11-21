@@ -3,7 +3,7 @@ package hr.nullteam.rsc.ui.presenter.login;
 import javax.inject.Inject;
 
 import hr.nullteam.rsc.business.api.UserApi;
-import hr.nullteam.rsc.business.api.model.Player;
+import hr.nullteam.rsc.business.api.model.User;
 import hr.nullteam.rsc.ui.fragment.login.LoginFragment;
 import hr.nullteam.rsc.ui.presenter.BusPresenter;
 import hr.nullteam.rsc.util.PreferenceUtils;
@@ -34,8 +34,8 @@ public final class LoginFragmentPresenter extends BusPresenter<LoginFragment> {
         add(userLoginSubscription);
     }
 
-    private void onLoginSuccess(Player player) {
-        preferenceUtils.setUser(player);
+    private void onLoginSuccess(User user) {
+        preferenceUtils.setUser(user);
         fireSuccessfulLoginEvent();
     }
 

@@ -2,9 +2,9 @@ package hr.nullteam.rsc.business.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public final class Player {
+public final class User {
 
-    public static final Player EMPTY = new Player();
+    public static final User EMPTY = new User();
 
     public static final int UNDEFNED_ID = -1;
 
@@ -23,10 +23,10 @@ public final class Player {
     @SerializedName("PictureUrl")
     private String avatarUrl;
 
-    public Player() {
+    public User() {
     }
 
-    public Player(long id, String email, String name, String surname, String avatarUrl) {
+    public User(long id, String email, String name, String surname, String avatarUrl) {
         this.id = id;
         this.email = email;
         this.name = name;

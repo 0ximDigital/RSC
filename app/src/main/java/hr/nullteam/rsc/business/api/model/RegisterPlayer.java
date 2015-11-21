@@ -2,7 +2,7 @@ package hr.nullteam.rsc.business.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class RegisterPlayer {
+public final class RegisterPlayer {
 
     @SerializedName("Email")
     private String email;

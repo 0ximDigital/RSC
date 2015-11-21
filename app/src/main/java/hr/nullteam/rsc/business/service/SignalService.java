@@ -36,6 +36,12 @@ public class SignalService extends Service {
 
         proxy.invoke("JoinGroup", "Group1");
 
+        //Then call on() to handle the messages when they are received.
+        proxy.on("addNewMessageToPage", msg -> {
+            Log.d("result := ", msg);
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        }, String.class);
+
         SignalRFuture<Void> awaitConnection = connection.start();
         try {
             awaitConnection.get();
@@ -47,12 +53,14 @@ public class SignalService extends Service {
 
         proxy.invoke("Send", "Android", "ping + " + (new Date()).getTime());
 
-        //Then call on() to handle the messages when they are received.
-        proxy.on("broadcastMessage", msg -> {
-            Log.d("result := ", msg);
-            Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-        }, String.class);
 
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e("TAG", "destroy service");
     }
 
     @Override

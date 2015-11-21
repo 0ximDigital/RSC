@@ -3,7 +3,7 @@ package hr.nullteam.rsc.ui.presenter.profile;
 import javax.inject.Inject;
 
 import hr.nullteam.rsc.business.api.UserApi;
-import hr.nullteam.rsc.business.api.model.Player;
+import hr.nullteam.rsc.business.api.model.User;
 import hr.nullteam.rsc.ui.fragment.profile.ProfileDetailsFragment;
 import hr.nullteam.rsc.ui.presenter.BusPresenter;
 import hr.nullteam.rsc.util.PreferenceUtils;
@@ -26,7 +26,7 @@ public class ProfileDetailsFragmentPresenter extends BusPresenter<ProfileDetails
     private Subscription playerSubscription;
 
     public void onUserId(long userId) {
-        if(userId == Player.UNDEFNED_ID) {
+        if(userId == User.UNDEFNED_ID) {
             setViewData(preferenceUtils.getUser());
         } else {
             playerSubscription = userApi.getPlayerWithId(userId)
@@ -37,27 +37,27 @@ public class ProfileDetailsFragmentPresenter extends BusPresenter<ProfileDetails
         }
     }
 
-    private void onPlayerSuccess(Player player) {
-        setViewData(player);
+    private void onPlayerSuccess(User user) {
+        setViewData(user);
     }
 
     private void onPlayerError(Throwable throwable) {
         remove(playerSubscription);
         throwable.printStackTrace();
         toastUtils.showToast("Error fetching user data");
-        setViewData(Player.EMPTY);
+        setViewData(User.EMPTY);
     }
 
     private void onPlayerCompletion() {
         remove(playerSubscription);
     }
 
-    public void setViewData(Player player) {
+    public void setViewData(User user) {
         ProfileDetailsFragment fragment = getView();
         if(fragment == null) {
             return;
         }
-        fragment.setPlayerData(player);
+        fragment.setUserData(user);
     }
 
 }

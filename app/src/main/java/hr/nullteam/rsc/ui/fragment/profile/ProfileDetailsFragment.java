@@ -12,7 +12,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.Bind;
 import hr.nullteam.rsc.R;
-import hr.nullteam.rsc.business.api.model.Player;
+import hr.nullteam.rsc.business.api.model.User;
 import hr.nullteam.rsc.ui.fragment.DaggerFragment;
 import hr.nullteam.rsc.ui.module.FragmentComponent;
 import hr.nullteam.rsc.ui.presenter.profile.ProfileDetailsFragmentPresenter;
@@ -28,7 +28,7 @@ public class ProfileDetailsFragment extends DaggerFragment<ProfileDetailsFragmen
     private static final String KEY_USER_ID = "key_user_id";
 
     private long userId;
-    private Player player;
+    private User user;
 
     @Bind(R.id.email_text)
     TextView email;
@@ -39,8 +39,8 @@ public class ProfileDetailsFragment extends DaggerFragment<ProfileDetailsFragmen
     @Bind(R.id.surname_text)
     TextView surname;
 
-    @Bind(R.id.player_avatar)
-    SimpleDraweeView playerAvatar;
+    @Bind(R.id.user_avatar)
+    SimpleDraweeView userAvatar;
 
     public static ProfileDetailsFragment newInstance(long userId) {
         ProfileDetailsFragment profileDetailsFragment = new ProfileDetailsFragment();
@@ -94,17 +94,17 @@ public class ProfileDetailsFragment extends DaggerFragment<ProfileDetailsFragmen
         fragmentComponent.inject(this);
     }
 
-    public void setPlayerData(Player player) {
-        this.player = player;
+    public void setUserData(User user) {
+        this.user = user;
         populateView();
     }
 
     private void populateView() {
-        Uri avatarUri = player.getAvatarUrl() == null ? Uri.EMPTY : Uri.parse(player.getAvatarUrl());
-        playerAvatar.setImageURI(avatarUri);
-        email.setText(player.getEmail());
-        name.setText(player.getName());
-        surname.setText(player.getSurname());
+        Uri avatarUri = user.getAvatarUrl() == null ? Uri.EMPTY : Uri.parse(user.getAvatarUrl());
+        userAvatar.setImageURI(avatarUri);
+        email.setText(user.getEmail());
+        name.setText(user.getName());
+        surname.setText(user.getSurname());
     }
 
 

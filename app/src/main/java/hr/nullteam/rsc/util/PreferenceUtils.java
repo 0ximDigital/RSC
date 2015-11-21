@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 
 import javax.inject.Inject;
 
-import hr.nullteam.rsc.business.api.model.Player;
+import hr.nullteam.rsc.business.api.model.User;
 
 public final class PreferenceUtils {
 
@@ -28,16 +28,16 @@ public final class PreferenceUtils {
         return context.getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
     }
 
-    public void setUser(Player player) {
-        getUserSharedPreferences().edit().putString(KEY_USER, gson.toJson(player)).apply();
+    public void setUser(User user) {
+        getUserSharedPreferences().edit().putString(KEY_USER, gson.toJson(user)).apply();
     }
 
-    public Player getUser() {
+    public User getUser() {
         if(getUserSharedPreferences().contains(KEY_USER)) {
-            return gson.fromJson(getUserSharedPreferences().getString(KEY_USER, ""), Player.class);
+            return gson.fromJson(getUserSharedPreferences().getString(KEY_USER, ""), User.class);
         }
         else {
-            return Player.EMPTY;
+            return User.EMPTY;
         }
     }
 
