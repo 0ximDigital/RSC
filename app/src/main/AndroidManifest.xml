@@ -35,17 +35,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".ui.activity.ProfileActivity" />
-
-        <activity android:name=".ui.activity.MainActivity"/>
-
-        <activity android:name=".ui.activity.PreGameActivity"/>
+        <activity android:name=".ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.PreGameActivity" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCzC7zP2d6hdhxfUvO9W_12Cigj-dWkVyk" />
 
+        <service
+            android:name=".business.service.SignalService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>
