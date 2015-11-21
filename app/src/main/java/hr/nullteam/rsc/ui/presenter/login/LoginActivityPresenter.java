@@ -24,7 +24,7 @@ public final class LoginActivityPresenter extends BusPresenter<LoginActivity> {
 
     @Subscribe
     public void on(LoginFragmentPresenter.SuccessfulLoginEvent event) {
-        router.showUserProfile();
+        router.showMainScreen();
         router.finishCurrentActivity();
     }
 

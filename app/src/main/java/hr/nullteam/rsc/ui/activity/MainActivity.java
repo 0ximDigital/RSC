@@ -1,5 +1,7 @@
 package hr.nullteam.rsc.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
@@ -19,6 +21,11 @@ public class MainActivity extends PresenterActivity<MainActivityPresenter> {
     FragmentManager fragmentManager;
 
     private MainFragment mainFragment;
+
+    public static Intent createIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

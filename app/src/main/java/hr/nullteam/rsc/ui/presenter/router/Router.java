@@ -12,4 +12,8 @@ public interface Router {
 
     void showUserProfile(long profileId);
 
+    void showMainScreen();
+
+    void showPreGameScreen();
+
 }

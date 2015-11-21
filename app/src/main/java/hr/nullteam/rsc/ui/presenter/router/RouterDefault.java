@@ -5,6 +5,8 @@ import android.content.Intent;
 
 import javax.inject.Inject;
 
+import hr.nullteam.rsc.ui.activity.MainActivity;
+import hr.nullteam.rsc.ui.activity.PreGameActivity;
 import hr.nullteam.rsc.ui.activity.ProfileActivity;
 
 public final class RouterDefault implements Router {
@@ -34,6 +36,16 @@ public final class RouterDefault implements Router {
     @Override
     public void showUserProfile(long profileId) {
         startIntent(ProfileActivity.createIntent(activity, profileId));
+    }
+
+    @Override
+    public void showMainScreen() {
+        startIntent(MainActivity.createIntent(activity));
+    }
+
+    @Override
+    public void showPreGameScreen() {
+        startIntent(PreGameActivity.createIntent(activity));
     }
 
 }
