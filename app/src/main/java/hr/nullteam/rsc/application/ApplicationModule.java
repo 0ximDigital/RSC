@@ -19,6 +19,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import hr.nullteam.rsc.business.api.JudgeApi;
+import hr.nullteam.rsc.business.api.PlayerApi;
+import hr.nullteam.rsc.business.api.TeamApi;
 import hr.nullteam.rsc.business.api.UserApi;
 import hr.nullteam.rsc.business.interactor.CacheInteractor;
 import hr.nullteam.rsc.config.Urls;
@@ -94,6 +97,42 @@ public final class ApplicationModule {
                 .setConverter(gsonConverter)
                 .build();
         return restAdapter.create(UserApi.class);
+    }
+
+    @Provides
+    @Singleton
+    JudgeApi provideJudgeApi(OkClient okClient, GsonConverter gsonConverter) {
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setClient(okClient)
+                .setEndpoint(Urls.BASE_URL + Urls.JUDGE_ENDPOINT)
+                .setConverter(gsonConverter)
+                .build();
+        return restAdapter.create(JudgeApi.class);
+    }
+
+    @Provides
+    @Singleton
+    PlayerApi providePlayerApi(OkClient okClient, GsonConverter gsonConverter) {
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setClient(okClient)
+                .setEndpoint(Urls.BASE_URL + Urls.PLAYER_ENDPOINT)
+                .setConverter(gsonConverter)
+                .build();
+        return restAdapter.create(PlayerApi.class);
+    }
+
+    @Provides
+    @Singleton
+    TeamApi provideTeamApi(OkClient okClient, GsonConverter gsonConverter) {
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setClient(okClient)
+                .setEndpoint(Urls.BASE_URL + Urls.TEAM_ENDPOINT)
+                .setConverter(gsonConverter)
+                .build();
+        return restAdapter.create(TeamApi.class);
     }
 
     @Provides

@@ -11,6 +11,9 @@ import com.squareup.otto.Bus;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import hr.nullteam.rsc.business.api.JudgeApi;
+import hr.nullteam.rsc.business.api.PlayerApi;
+import hr.nullteam.rsc.business.api.TeamApi;
 import hr.nullteam.rsc.business.api.UserApi;
 import hr.nullteam.rsc.business.dao.DbModule;
 import hr.nullteam.rsc.business.interactor.CacheInteractor;
@@ -77,5 +80,11 @@ public interface ApplicationComponent extends ApplicationComponentInjects {
     ClipboardManager clipboardManager();
 
     UserApi userApi();
+
+    JudgeApi judgeApi();
+
+    PlayerApi playerApi();
+
+    TeamApi teamApi();
 
 }
