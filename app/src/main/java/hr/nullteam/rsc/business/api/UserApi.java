@@ -1,6 +1,7 @@
 package hr.nullteam.rsc.business.api;
 
 import hr.nullteam.rsc.business.api.model.Player;
+import hr.nullteam.rsc.business.api.model.RegisterPlayer;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -17,9 +18,9 @@ public interface UserApi {
     Observable<Player> getPlayerWithEmail(@Query("email") String email);
 
     @POST("/Register")
-    Observable<Player> registerPlayer(@Body Player player);
+    Observable<Player> registerPlayer(@Body RegisterPlayer registerPlayer);
 
     @POST("/Login")
-    Observable<Player> loginPlayer(@Query("email") String email, @Query("password") String password);
+    Observable<Player> loginPlayer(@Query("email") String email, @Query("password") String password, @Body String bodyString);
 
 }

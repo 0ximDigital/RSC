@@ -21,10 +21,10 @@ public final class LoginFragment extends DaggerFragment<LoginFragmentPresenter> 
 
     public static String TAG = LoginFragment.class.getSimpleName();
 
-    @Bind(R.id.username_text)
-    EditText username;
+    @Bind(R.id.email_edit_text)
+    EditText email;
 
-    @Bind(R.id.password_text)
+    @Bind(R.id.password_edit_text)
     EditText password;
 
     public static LoginFragment newInstance() {
@@ -57,7 +57,7 @@ public final class LoginFragment extends DaggerFragment<LoginFragmentPresenter> 
 
     @OnClick(R.id.login_button)
     void onLoginButtonClick() {
-        getPresenter().onLoginButtonClick(username.getText().toString(), password.getText().toString());
+        getPresenter().onLoginButtonClick(email.getText().toString(), password.getText().toString());
     }
 
     @OnClick(R.id.register_button)

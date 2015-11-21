@@ -5,20 +5,26 @@
     android:background="#fff">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
         android:layout_gravity="center"
-        android:layout_height="wrap_content">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <EditText
-            android:id="@+id/username_text"
+            android:id="@+id/email_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="email" />
 
         <EditText
-            android:id="@+id/password_text"
+            android:id="@+id/password_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="password"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/login_button"

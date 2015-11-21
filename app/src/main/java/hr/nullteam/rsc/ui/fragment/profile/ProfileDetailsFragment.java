@@ -1,12 +1,18 @@
 package hr.nullteam.rsc.ui.fragment.profile;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
+import butterknife.Bind;
 import hr.nullteam.rsc.R;
+import hr.nullteam.rsc.business.api.model.Player;
 import hr.nullteam.rsc.ui.fragment.DaggerFragment;
 import hr.nullteam.rsc.ui.module.FragmentComponent;
 import hr.nullteam.rsc.ui.presenter.profile.ProfileDetailsFragmentPresenter;
@@ -17,10 +23,24 @@ import nucleus.factory.RequiresPresenter;
 public class ProfileDetailsFragment extends DaggerFragment<ProfileDetailsFragmentPresenter> {
 
     public static final String TAG = ProfileDetailsFragment.class.getSimpleName();
+    public static final int USER_ID = -1;
 
     private static final String KEY_USER_ID = "key_user_id";
 
-    private long userId;        // TODO - stavit usera
+    private long userId;
+    private Player player;
+
+    @Bind(R.id.email_text)
+    TextView email;
+
+    @Bind(R.id.name_text)
+    TextView name;
+
+    @Bind(R.id.surname_text)
+    TextView surname;
+
+    @Bind(R.id.player_avatar)
+    SimpleDraweeView playerAvatar;
 
     public static ProfileDetailsFragment newInstance(long userId) {
         ProfileDetailsFragment profileDetailsFragment = new ProfileDetailsFragment();
@@ -46,9 +66,19 @@ public class ProfileDetailsFragment extends DaggerFragment<ProfileDetailsFragmen
         extractArguments();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestData();
+    }
+
     private void extractArguments() {
         Bundle arguments = getArguments();
-        userId = arguments.getLong(KEY_USER_ID, -1);        // TODO - NOP za usera
+        userId = arguments.getLong(KEY_USER_ID, USER_ID);
+    }
+
+    private void requestData() {
+        getPresenter().onUserId(userId);
     }
 
     @Nullable
@@ -64,6 +94,18 @@ public class ProfileDetailsFragment extends DaggerFragment<ProfileDetailsFragmen
         fragmentComponent.inject(this);
     }
 
+    public void setPlayerData(Player player) {
+        this.player = player;
+        populateView();
+    }
+
+    private void populateView() {
+        Uri avatarUri = player.getAvatarUrl() == null ? Uri.EMPTY : Uri.parse(player.getAvatarUrl());
+        playerAvatar.setImageURI(avatarUri);
+        email.setText(player.getEmail());
+        name.setText(player.getName());
+        surname.setText(player.getSurname());
+    }
 
 
 }

@@ -32,13 +32,19 @@ public final class PreferenceUtils {
         getUserSharedPreferences().edit().putString(KEY_USER, gson.toJson(player)).apply();
     }
 
-    public Player getUser(Player player) {
+    public Player getUser() {
         if(getUserSharedPreferences().contains(KEY_USER)) {
             return gson.fromJson(getUserSharedPreferences().getString(KEY_USER, ""), Player.class);
         }
         else {
             return Player.EMPTY;
         }
+    }
+
+    public void logout() {
+        getUserSharedPreferences().edit()
+                .remove(KEY_USER)
+                .apply();
     }
 
 }

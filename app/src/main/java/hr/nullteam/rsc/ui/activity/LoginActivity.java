@@ -62,6 +62,6 @@ public final class LoginActivity extends PresenterActivity<LoginActivityPresente
         if (registerFragment == null) {
             registerFragment = RegisterFragment.newInstance();
         }
-        fragmentManager.beginTransaction().add(R.id.activity_container, registerFragment, RegisterFragment.TAG).commit();
+        fragmentManager.beginTransaction().addToBackStack(null).add(R.id.activity_container, registerFragment, RegisterFragment.TAG).commit();
     }
 }

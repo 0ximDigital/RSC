@@ -53,8 +53,13 @@ public class MainFragment extends DaggerFragment<MainFragmentPresenter> {
     }
 
     @OnClick(R.id.spectate_button)
-    public void  onSpectatebuttonClick() {
+    public void onSpectateButtonClick() {
         getPresenter().onSpectateButtonClick();
+    }
+
+    @OnClick(R.id.view_profile_button)
+    public void onViewProfileClick() {
+        getPresenter().onViewProfileClick();
     }
 
 }

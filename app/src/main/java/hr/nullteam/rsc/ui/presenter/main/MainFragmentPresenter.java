@@ -19,4 +19,8 @@ public class MainFragmentPresenter extends BusPresenter<MainFragment> {
 
     }
 
+    public void onViewProfileClick() {
+        router.showUserProfile();
+    }
+
 }

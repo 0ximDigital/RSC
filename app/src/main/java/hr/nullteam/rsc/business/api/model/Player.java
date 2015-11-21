@@ -6,6 +6,8 @@ public final class Player {
 
     public static final Player EMPTY = new Player();
 
+    public static final int UNDEFNED_ID = -1;
+
     @SerializedName("Id")
     private long id;
 

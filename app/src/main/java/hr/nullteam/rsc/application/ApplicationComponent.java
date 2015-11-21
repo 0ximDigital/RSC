@@ -11,6 +11,7 @@ import com.squareup.otto.Bus;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import hr.nullteam.rsc.business.api.UserApi;
 import hr.nullteam.rsc.business.dao.DbModule;
 import hr.nullteam.rsc.business.interactor.CacheInteractor;
 import hr.nullteam.rsc.util.DateUtils;
@@ -74,5 +75,7 @@ public interface ApplicationComponent extends ApplicationComponentInjects {
     NotificationManager notificationManager();
 
     ClipboardManager clipboardManager();
+
+    UserApi userApi();
 
 }

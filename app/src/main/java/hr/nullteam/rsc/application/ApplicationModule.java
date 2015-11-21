@@ -19,7 +19,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import hr.nullteam.rsc.business.api.ContentApi;
+import hr.nullteam.rsc.business.api.UserApi;
 import hr.nullteam.rsc.business.interactor.CacheInteractor;
 import hr.nullteam.rsc.config.Urls;
 import hr.nullteam.rsc.util.DateUtils;
@@ -86,14 +86,14 @@ public final class ApplicationModule {
 
     @Provides
     @Singleton
-    ContentApi provideUserApi(OkClient okClient, GsonConverter gsonConverter) {
+    UserApi provideUserApi(OkClient okClient, GsonConverter gsonConverter) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setClient(okClient)
                 .setEndpoint(Urls.BASE_URL + Urls.USER_ENDPOINT)
                 .setConverter(gsonConverter)
                 .build();
-        return restAdapter.create(ContentApi.class);
+        return restAdapter.create(UserApi.class);
     }
 
     @Provides
