@@ -5,6 +5,8 @@ import android.content.Intent;
 
 import javax.inject.Inject;
 
+import hr.nullteam.rsc.ui.activity.ProfileActivity;
+
 public final class RouterDefault implements Router {
 
     private final Activity activity;
@@ -22,6 +24,16 @@ public final class RouterDefault implements Router {
     @Override
     public void startIntent(Intent intent) {
         activity.startActivity(intent);
+    }
+
+    @Override
+    public void showUserProfile() {
+        startIntent(ProfileActivity.createIntent(activity, -1));
+    }
+
+    @Override
+    public void showUserProfile(long profileId) {
+        startIntent(ProfileActivity.createIntent(activity, profileId));
     }
 
 }

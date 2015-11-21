@@ -8,4 +8,8 @@ public interface Router {
 
     void startIntent(Intent intent);
 
+    void showUserProfile();
+
+    void showUserProfile(long profileId);
+
 }
