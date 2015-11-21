@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 
+import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.OkHttpClient;
@@ -20,6 +21,7 @@ import dagger.Module;
 import dagger.Provides;
 import hr.nullteam.rsc.business.api.ContentApi;
 import hr.nullteam.rsc.business.interactor.CacheInteractor;
+import hr.nullteam.rsc.config.Urls;
 import hr.nullteam.rsc.util.DateUtils;
 import hr.nullteam.rsc.util.DisplayUtils;
 import hr.nullteam.rsc.util.HttpUtils;
@@ -75,6 +77,7 @@ public final class ApplicationModule {
     @Singleton
     OkClient provideOkClient() {
         OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.networkInterceptors().add(new StethoInterceptor());
         okHttpClient.setConnectTimeout(TIMEOUT, TimeUnit.MILLISECONDS);
         okHttpClient.setReadTimeout(TIMEOUT, TimeUnit.MILLISECONDS);
         okHttpClient.setWriteTimeout(TIMEOUT, TimeUnit.MILLISECONDS);
@@ -83,11 +86,11 @@ public final class ApplicationModule {
 
     @Provides
     @Singleton
-    ContentApi provideContentApi(OkClient okClient, GsonConverter gsonConverter) {
+    ContentApi provideUserApi(OkClient okClient, GsonConverter gsonConverter) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setClient(okClient)
-                .setEndpoint("TODO")    // TODO
+                .setEndpoint(Urls.BASE_URL + Urls.USER_ENDPOINT)
                 .setConverter(gsonConverter)
                 .build();
         return restAdapter.create(ContentApi.class);
