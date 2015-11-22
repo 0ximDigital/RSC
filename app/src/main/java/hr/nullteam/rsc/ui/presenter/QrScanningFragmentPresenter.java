@@ -2,9 +2,12 @@ package hr.nullteam.rsc.ui.presenter;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import javax.inject.Inject;
 
 import eu.livotov.labs.android.camview.ScannerLiveView;
+import hr.nullteam.rsc.business.api.QrData;
 import hr.nullteam.rsc.ui.fragment.QrScanningFragment;
 import hr.nullteam.rsc.util.ToastUtils;
 
@@ -12,6 +15,9 @@ public class QrScanningFragmentPresenter extends BusPresenter<QrScanningFragment
 
     @Inject
     ToastUtils toastUtils;
+
+    @Inject
+    Gson gson;
 
     private static final String TAG = QrScanningFragmentPresenter.class.getSimpleName();
 
@@ -46,13 +52,14 @@ public class QrScanningFragmentPresenter extends BusPresenter<QrScanningFragment
     };
 
     private void fireQrScannedEvent(String data) {
-        bus.post(new QrScannedEvent(data));
+        QrData qrData = gson.fromJson(data, QrData.class);
+        bus.post(new QrScannedEvent(qrData));
     }
 
     public static final class QrScannedEvent {
-        public final String data;
-        public QrScannedEvent(String data) {
-            this.data = data;
+        public final QrData qrData;
+        public QrScannedEvent(QrData qrData) {
+            this.qrData = qrData;
         }
     }
 }

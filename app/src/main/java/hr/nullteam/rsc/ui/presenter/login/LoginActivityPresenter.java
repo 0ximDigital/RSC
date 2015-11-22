@@ -15,11 +15,13 @@ public final class LoginActivityPresenter extends BusPresenter<LoginActivity> {
 
     @Subscribe
     public void on(LoginFragmentPresenter.ShowRegisterEvent event){
+        router.showPlayerGame();
+        router.finishCurrentActivity();/*
         LoginActivity activity = getView();
         if(activity == null) {
             return;
         }
-        activity.showRegisterFragment();
+        activity.showRegisterFragment();*/ // TODO
     }
 
     @Subscribe

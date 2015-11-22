@@ -16,4 +16,6 @@ public interface Router {
 
     void showPreGameScreen();
 
+    void showPlayerGame();
+
 }

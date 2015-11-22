@@ -6,6 +6,7 @@ import android.content.Intent;
 import javax.inject.Inject;
 
 import hr.nullteam.rsc.ui.activity.MainActivity;
+import hr.nullteam.rsc.ui.activity.PlayerGameActivity;
 import hr.nullteam.rsc.ui.activity.PreGameActivity;
 import hr.nullteam.rsc.ui.activity.ProfileActivity;
 
@@ -46,6 +47,11 @@ public final class RouterDefault implements Router {
     @Override
     public void showPreGameScreen() {
         startIntent(PreGameActivity.createIntent(activity));
+    }
+
+    @Override
+    public void showPlayerGame() {
+        startIntent(PlayerGameActivity.createIntent(activity));
     }
 
 }

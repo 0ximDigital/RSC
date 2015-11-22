@@ -38,6 +38,7 @@
         <activity android:name=".ui.activity.ProfileActivity" />
         <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.PreGameActivity" />
+        <activity android:name=".ui.activity.PlayerGameActivity"/>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

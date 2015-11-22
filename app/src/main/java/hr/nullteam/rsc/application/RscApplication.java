@@ -1,14 +1,12 @@
 package hr.nullteam.rsc.application;
 
 import android.app.Application;
-import android.content.Intent;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 import hr.nullteam.rsc.BuildConfig;
-import hr.nullteam.rsc.business.service.SignalService;
 import microsoft.aspnet.signalr.client.Platform;
 import microsoft.aspnet.signalr.client.http.android.AndroidPlatformComponent;
 
@@ -31,7 +29,6 @@ public final class RscApplication extends Application {
         FlowManager.init(this);
         Fresco.initialize(this);
 
-        startService(new Intent(this, SignalService.class));
     }
 
     public ApplicationComponent getApplicationComponent() {

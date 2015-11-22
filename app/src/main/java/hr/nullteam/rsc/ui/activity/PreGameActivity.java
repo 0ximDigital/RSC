@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import hr.nullteam.rsc.R;
 import hr.nullteam.rsc.ui.fragment.QrScanningFragment;
+import hr.nullteam.rsc.ui.fragment.game.PreGameFragment;
 import hr.nullteam.rsc.ui.module.ActivityComponent;
 import hr.nullteam.rsc.ui.presenter.main.PreGameActivityPresenter;
 import nucleus.factory.PresenterFactory;
@@ -21,6 +22,7 @@ public class PreGameActivity extends PresenterActivity<PreGameActivityPresenter>
     FragmentManager fragmentManager;
 
     private QrScanningFragment qrScanningFragment;
+    private PreGameFragment preGameFragment;
 
     public static Intent createIntent(Context context) {
         Intent intent = new Intent(context, PreGameActivity.class);
@@ -33,9 +35,12 @@ public class PreGameActivity extends PresenterActivity<PreGameActivityPresenter>
         setContentView(R.layout.activity_empty);
 
         if (savedInstanceState == null) {
+            preGameFragment = PreGameFragment.newInstance();
+            fragmentManager.beginTransaction().add(R.id.activity_container, preGameFragment, PreGameFragment.TAG).commit();
             qrScanningFragment = QrScanningFragment.newInstance();
             fragmentManager.beginTransaction().add(R.id.activity_container, qrScanningFragment, QrScanningFragment.TAG).commit();
         } else {
+            preGameFragment = (PreGameFragment) fragmentManager.findFragmentByTag(PreGameFragment.TAG);
             qrScanningFragment = (QrScanningFragment) fragmentManager.findFragmentByTag(QrScanningFragment.TAG);
         }
     }

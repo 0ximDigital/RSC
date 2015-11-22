@@ -1,12 +1,13 @@
 package hr.nullteam.rsc.business.api;
 
-import hr.nullteam.rsc.business.api.model.User;
 import hr.nullteam.rsc.business.api.model.RegisterPlayer;
+import hr.nullteam.rsc.business.api.model.User;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
+import retrofit.mime.TypedFile;
 import rx.Observable;
 
 public interface UserApi {
@@ -22,5 +23,8 @@ public interface UserApi {
 
     @POST("/Login")
     Observable<User> loginPlayer(@Query("email") String email, @Query("password") String password, @Body String bodyString);
+
+    @POST("/UpdateUserImage")
+    Observable<User> updateUserImage(@Query("email") String email, @Body TypedFile file);
 
 }
