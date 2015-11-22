@@ -16,7 +16,7 @@ import nucleus.factory.PresenterFactory;
 import nucleus.factory.RequiresPresenter;
 
 @RequiresPresenter(PlayerGameActivityPresenter.class)
-public class PlayerGameActivity extends PresenterActivity<PlayerGameActivityPresenter> {
+public class PlayerGameActivity extends PresenterActivity<PlayerGameActivityPresenter>{
 
     @Inject
     FragmentManager fragmentManager;
@@ -32,7 +32,7 @@ public class PlayerGameActivity extends PresenterActivity<PlayerGameActivityPres
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_empty);
+        setContentView(R.layout.activity_player_game);
 
         if (savedInstanceState == null) {
             mapFragment = MapFragment.newInstance();

@@ -53,6 +53,7 @@ public class MapFragment extends DaggerFragment<MapFragmentPresenter> {
     private void setupMap() {
         if(this.map == null) {
             this.map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_fragment)).getMap();
+            this.map.getUiSettings().setScrollGesturesEnabled(false);
         }
         // TODO
     }
