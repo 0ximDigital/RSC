@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentManager;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import hr.nullteam.rsc.R;
 import hr.nullteam.rsc.ui.fragment.MapFragment;
 import hr.nullteam.rsc.ui.fragment.game.PlayerGameFragment;
@@ -34,6 +36,8 @@ public class PlayerGameActivity extends PresenterActivity<PlayerGameActivityPres
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_game);
 
+        ButterKnife.bind(this);
+
         if (savedInstanceState == null) {
             mapFragment = MapFragment.newInstance();
             fragmentManager.beginTransaction().add(R.id.activity_container, mapFragment, MapFragment.TAG).commit();
@@ -58,6 +62,11 @@ public class PlayerGameActivity extends PresenterActivity<PlayerGameActivityPres
             getActivityComponent().inject(presenter);
             return presenter;
         });
+    }
+
+    @OnClick(R.id.dummy_button)
+    public void onButtonClick() {
+        getPresenter().onButtonClick();
     }
 
 }

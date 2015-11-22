@@ -15,8 +15,11 @@ import hr.nullteam.rsc.application.RscApplication;
 public class GestureFrameLayout extends FrameLayout {
 
     private final int SWIPE_MIN_DISTANCE = 80;
-    private final int SWIPE_MAX_OFF_PATH = 250;
     private final int SWIPE_THRESHOLD_VELOCITY = 150;
+
+    public enum FlingDirection {
+        UP, DOWN, LEFT, RIGHT
+    }
 
     @Inject
     Bus bus;
@@ -53,19 +56,19 @@ public class GestureFrameLayout extends FrameLayout {
             try {
                 if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    fireFlingEvent(FlingEvent.FlingDirection.LEFT);
+                    fireFlingEvent(FlingDirection.LEFT);
                     return true;
                 } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    fireFlingEvent(FlingEvent.FlingDirection.RIGHT);
+                    fireFlingEvent(FlingDirection.RIGHT);
                     return true;
                 } else if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
-                    fireFlingEvent(FlingEvent.FlingDirection.UP);
+                    fireFlingEvent(FlingDirection.UP);
                     return true;
                 } else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
-                    fireFlingEvent(FlingEvent.FlingDirection.DOWN);
+                    fireFlingEvent(FlingDirection.DOWN);
                     return true;
                 }
             } catch (Exception e) {
@@ -77,19 +80,15 @@ public class GestureFrameLayout extends FrameLayout {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2,
                                 float distanceX, float distanceY) {
-            //do whatever you want here
             return false;
         }
     }
 
-    private void fireFlingEvent(FlingEvent.FlingDirection direction) {
+    private void fireFlingEvent(FlingDirection direction) {
         bus.post(new FlingEvent(direction));
     }
 
     public static final class FlingEvent {
-        public enum FlingDirection {
-            UP, DOWN, LEFT, RIGHT
-        }
 
         public final FlingDirection flingDirection;
 

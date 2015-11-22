@@ -26,6 +26,7 @@ import hr.nullteam.rsc.util.ListUtils;
 import hr.nullteam.rsc.util.PreferenceUtils;
 import hr.nullteam.rsc.util.StringUtils;
 import hr.nullteam.rsc.util.ToastUtils;
+import hr.nullteam.rsc.util.VibratorUtils;
 
 @Singleton
 @Component(
@@ -68,6 +69,8 @@ public interface ApplicationComponent extends ApplicationComponentInjects {
     StringUtils stringUtils();
 
     PreferenceUtils preferenceUtils();
+
+    VibratorUtils vibratorUtils();
 
     KeyboardUtils keyboardUtils();
 

@@ -35,6 +35,7 @@ import hr.nullteam.rsc.util.NetworkUtils;
 import hr.nullteam.rsc.util.PreferenceUtils;
 import hr.nullteam.rsc.util.StringUtils;
 import hr.nullteam.rsc.util.ToastUtils;
+import hr.nullteam.rsc.util.VibratorUtils;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
@@ -139,6 +140,12 @@ public final class ApplicationModule {
     @Singleton
     Resources provideResources() {
         return this.rscApplication.getResources();
+    }
+
+    @Provides
+    @Singleton
+    VibratorUtils provideVibratorUtils() {
+        return new VibratorUtils(this.rscApplication);
     }
 
     @Provides

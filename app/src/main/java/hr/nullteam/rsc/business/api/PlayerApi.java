@@ -14,7 +14,7 @@ public interface PlayerApi {
     Observable<Player> createNewPlayer(@Body Player newPlayer);
 
     @POST("/UpdateAlive")
-    Observable<Player> updatePlayerAlive(@Query("playerId") long playerid, @Query("alive") boolean isAlive);
+    Observable<Player> updatePlayerAlive(@Query("playerId") long playerid, @Query("alive") boolean isAlive, @Body String body);
 
     @POST("/UpdateReady")
     Observable<Player> updatePlayerReady(@Query("playerId") long playerid, @Query("ready") boolean isReady);

@@ -1,53 +1,101 @@
 package hr.nullteam.rsc.ui.presenter.game;
 
-import android.util.Log;
-import android.view.MotionEvent;
+import com.squareup.otto.Subscribe;
 
+import javax.inject.Inject;
+
+import hr.nullteam.rsc.business.api.PlayerApi;
+import hr.nullteam.rsc.business.api.model.Player;
+import hr.nullteam.rsc.business.service.SignalService;
 import hr.nullteam.rsc.ui.activity.PlayerGameActivity;
 import hr.nullteam.rsc.ui.presenter.BusPresenter;
+import hr.nullteam.rsc.ui.view.GestureFrameLayout;
+import hr.nullteam.rsc.util.PreferenceUtils;
+import hr.nullteam.rsc.util.VibratorUtils;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class PlayerGameActivityPresenter extends BusPresenter<PlayerGameActivity> {
 
-    private final int SWIPE_MIN_DISTANCE = 120;
-    private final int SWIPE_MAX_OFF_PATH = 250;
-    private final int SWIPE_THRESHOLD_VELOCITY = 200;
+    @Inject
+    VibratorUtils vibratorUtils;
 
-    public void onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        try {
-            if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
+    @Inject
+    PlayerApi playerApi;
 
-            if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
-                    && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                fireFlingEvent(FlingEvent.FlingDirection.LEFT);
-            } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
-                    && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                fireFlingEvent(FlingEvent.FlingDirection.RIGHT);
-            } else if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE
-                    && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
-                fireFlingEvent(FlingEvent.FlingDirection.UP);
-            } else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE
-                    && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
-                fireFlingEvent(FlingEvent.FlingDirection.DOWN);
-            }
-        } catch (Exception e) {
-            // nothing
+    @Inject
+    PreferenceUtils preferenceUtils;
+
+    private Subscription playerSubscription;
+
+    public void onButtonClick() {
+        long playerId = preferenceUtils.getPlayerId();
+        playerSubscription = playerApi.updatePlayerAlive(playerId, false, "")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onPlayerUpdateSuccess, this::onPlayerUpdateError, this::onPlayerUpdateCompletion);
+        add(playerSubscription);
+    }
+
+    private void onPlayerUpdateSuccess(Player player) {
+
+    }
+
+    private void onPlayerUpdateError(Throwable throwable) {
+        remove(playerSubscription);
+        throwable.printStackTrace();
+    }
+
+    private void onPlayerUpdateCompletion() {
+        remove(playerSubscription);
+    }
+
+    @Subscribe
+    public void on(GestureFrameLayout.FlingEvent event){
+        handleFlingEvent(event);
+    }
+
+    @Subscribe
+    public void on(PlayerGameFragmentPresenter.JoinTeamEvent event) {
+        PlayerGameActivity activity = getView();
+        if(activity == null) {
+            return;
+        }
+        activity.startService(SignalService.getjoinTeamIntent(activity, event.teamId));
+    }
+
+    private void handleFlingEvent(GestureFrameLayout.FlingEvent event) {
+        switch (event.flingDirection) {
+            case UP :
+                handleUpFling();
+                break;
+            case DOWN:
+                handleDownFling();
+                break;
+            case LEFT:
+                handleLeftFling();
+                break;
+            case RIGHT:
+                handleRightFling();
+                break;
         }
     }
 
-    private void fireFlingEvent(FlingEvent.FlingDirection direction){
-        Log.e("FLING", "Sending fling in " + direction + " direction");
-        bus.post(new FlingEvent(direction));
+    private void handleUpFling(){
+        vibratorUtils.vibrate(VibratorUtils.DANGER_PATTERN);
     }
 
-    public static final class FlingEvent {
-        public enum FlingDirection {
-            UP, DOWN, LEFT, RIGHT
-        }
-        public final FlingDirection flingDirection;
+    private void handleDownFling() {
+        vibratorUtils.vibrate(VibratorUtils.KILLED_PATTERN);
+    }
 
-        public FlingEvent(FlingDirection flingDirection) {
-            this.flingDirection = flingDirection;
-        }
+    private void handleLeftFling() {
+        vibratorUtils.vibrate(VibratorUtils.SPOTTED_PATTERN);
+    }
+
+    private void handleRightFling() {
+        vibratorUtils.vibrate(VibratorUtils.DANGER_PATTERN);
     }
 
 }
